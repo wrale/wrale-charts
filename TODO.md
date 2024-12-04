@@ -5,7 +5,7 @@
 - [x] Add GitHub Actions workflows
 - [x] Configure GitHub Pages
 - [x] Add repository description and topics
-- [ ] Set up branch protection rules
+- [ ] Set up branch protection rules (HOLD until further notice)
 - [x] Configure CODEOWNERS file
 - [x] Enable vulnerability alerts
 - [x] Enable automated dependency updates
@@ -68,8 +68,6 @@
   - [x] Chart request template
 - [x] Add pull request template
 - [x] Set up community guidelines
-- [ ] Create contribution rewards program
-- [ ] Plan community meetings
 
 ## DevOps
 - [ ] Set up monitoring
