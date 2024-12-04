@@ -1,0 +1,15 @@
+# Default owners for everything in the repo
+* @wrale/maintainers
+
+# Owners for all charts
+/charts/ @wrale/chart-maintainers
+
+# Workflow owners
+/.github/workflows/ @wrale/devops
+
+# Documentation owners
+*.md @wrale/docs
+/docs/ @wrale/docs
+
+# Chart-specific owners can be added below as we add charts
+#/charts/specific-chart/ @specific-team
