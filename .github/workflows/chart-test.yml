@@ -1,14 +1,12 @@
 name: Chart Testing
 
 on:
-  pull_request:
-    paths:
-      - 'charts/**'
+  # Run on PRs
+  pull_request: {}
+  # Run on pushes to main
   push:
     branches:
       - main
-    paths:
-      - 'charts/**'
 
 jobs:
   test:
