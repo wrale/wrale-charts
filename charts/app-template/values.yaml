@@ -87,12 +87,28 @@ application:
 
 ## Service configuration
 service:
-  # -- Service type
+  # -- Service type (ClusterIP, NodePort, LoadBalancer)
   type: ClusterIP
-  # -- Service port
-  port: 80
+  # -- Additional service labels
+  labels: {}
   # -- Service annotations
   annotations: {}
+  # -- Service ports configuration
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  # -- LoadBalancer IP (optional)
+  loadBalancerIP: ""
+  # -- Load balancer source ranges (optional)
+  loadBalancerSourceRanges: []
+  # -- External traffic policy (Local or Cluster)
+  externalTrafficPolicy: ""
+  # -- Specific cluster IP (optional)
+  clusterIP: ""
+  # -- Additional selector labels (optional)
+  selector: {}
 
 ## Ingress configuration
 ingress:
