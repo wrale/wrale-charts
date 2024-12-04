@@ -161,6 +161,10 @@ autoscaling:
 podDisruptionBudget:
   # -- Enable pod disruption budget
   enabled: false
+  # -- Additional PDB labels
+  labels: {}
+  # -- PDB annotations
+  annotations: {}
   # -- Minimum available pods
   minAvailable: 1
   # -- Maximum unavailable pods
