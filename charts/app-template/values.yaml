@@ -144,6 +144,10 @@ ingress:
 autoscaling:
   # -- Enable horizontal pod autoscaling
   enabled: false
+  # -- Additional HPA labels
+  labels: {}
+  # -- HPA annotations
+  annotations: {}
   # -- Minimum replicas
   minReplicas: 1
   # -- Maximum replicas
@@ -152,6 +156,26 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # -- Target memory utilization percentage
   targetMemoryUtilizationPercentage: 80
+  # -- Additional custom metrics for scaling
+  metrics: []
+  # -- Scaling behavior configuration
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+        - type: Percent
+          value: 100
+          periodSeconds: 15
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+        - type: Percent
+          value: 100
+          periodSeconds: 15
+        - type: Pods
+          value: 4
+          periodSeconds: 15
+      selectPolicy: Max
 
 ## Pod disruption budget configuration
 podDisruptionBudget:
