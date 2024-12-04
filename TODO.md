@@ -5,7 +5,7 @@
 - [x] Add GitHub Actions workflows
 - [x] Configure GitHub Pages
 - [x] Add repository description and topics
-- [ ] Set up branch protection rules (HOLD until further notice)
+- [ ] Set up branch protection rules (HOLD)
 - [x] Configure CODEOWNERS file
 - [x] Enable vulnerability alerts
 - [x] Enable automated dependency updates
@@ -22,7 +22,7 @@
 - [ ] Create architecture decision records (ADRs)
 
 ## Quality Controls
-- [ ] Set up pre-commit hooks
+- [ ] Set up pre-commit hooks (HOLD)
 - [x] Configure chart testing requirements
   - [x] Unit tests
   - [x] Integration tests
