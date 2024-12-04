@@ -4,6 +4,11 @@
 
 This document outlines the process for releasing new versions of Helm charts in this repository.
 
+## Repository Structure
+
+- `main` branch: Source code and chart development
+- `gh-pages` branch: Helm repository hosting packaged charts
+
 ## Release Types
 
 - Patch (0.0.X): Bug fixes and minor changes
@@ -46,9 +51,9 @@ This document outlines the process for releasing new versions of Helm charts in 
 
 1. Run Local Tests:
    ```bash
-   helm lint charts/my-chart
-   helm template charts/my-chart
-   helm test my-chart
+   ct lint --config .github/ct.yaml --charts charts/my-chart
+   ct install --config .github/ct.yaml --charts charts/my-chart
+   helm template --debug charts/my-chart
    ```
 
 2. CI/CD Checks:
@@ -60,37 +65,59 @@ This document outlines the process for releasing new versions of Helm charts in 
 1. Create Pull Request:
    - Title: `Release: Chart-Name vX.Y.Z`
    - Description: Include changelog
+   - Ensure Chart.yaml version is updated
 
 2. Review:
    - Get required approvals
    - Address feedback
+   - All CI checks must pass
 
 3. Merge:
    - Squash and merge to main
-   - GitHub Actions will:
+   - GitHub Actions will automatically:
      - Package the chart
-     - Push to GitHub Pages
-     - Create GitHub Release
+     - Create a GitHub Release
+     - Update the Helm repository index
+     - Push changes to gh-pages branch
 
 ### 4. Post-Release
 
 1. Verify:
-   - Chart is published
-   - Release is created
+   - Chart is published to https://wrale.github.io/wrale-charts
+   - GitHub Release is created with proper tags
+   - Chart can be installed via `helm install`
    - Documentation is updated
 
 2. Announce:
-   - Update release notes
-   - Notify users if needed
+   - Update release notes if needed
+   - Notify users of significant changes
 
 ## Rollback Process
 
 If issues are found after release:
 
-1. Create hotfix branch
+1. Create hotfix branch from the release tag
 2. Fix the issue
 3. Follow release process for patch version
-4. Document the issue and fix
+4. Document the issue and fix in CHANGELOG.md
+
+## Permissions and Requirements
+
+### GitHub Repository Settings
+
+1. GitHub Pages:
+   - Source: Deploy from branch
+   - Branch: gh-pages
+   - Folder: / (root)
+
+2. Branch Protection:
+   - Require pull request reviews
+   - Require status checks to pass
+   - Require linear history
+
+3. Workflow Permissions:
+   - Actions have contents:write permission
+   - GITHUB_TOKEN has necessary permissions
 
 ## Version Support
 
