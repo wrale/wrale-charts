@@ -1,0 +1,175 @@
+# Default values for app-template
+
+## Global parameters
+global:
+  # -- Namespace to deploy the application
+  namespace: ""
+  # -- Override the release name
+  nameOverride: ""
+  # -- Override the full name
+  fullnameOverride: ""
+  # -- Image pull secrets for all deployments/statefulsets
+  imagePullSecrets: []
+  # -- Node selector for all deployments/statefulsets
+  nodeSelector: {}
+  # -- Tolerations for all deployments/statefulsets
+  tolerations: []
+  # -- Affinity settings for all deployments/statefulsets
+  affinity: {}
+
+## Application image configuration
+image:
+  # -- Repository for application image
+  repository: nginx
+  # -- Tag for application image
+  tag: latest
+  # -- Pull policy for application image
+  pullPolicy: IfNotPresent
+
+## Application configuration
+application:
+  # -- Number of application replicas
+  replicaCount: 1
+  # -- Pod annotations
+  podAnnotations: {}
+  # -- Additional pod labels
+  podLabels: {}
+  # -- Pod security context
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 2000
+  # -- Container security context
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+  # -- Resource limits and requests
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  # -- Container ports
+  ports:
+    - name: http
+      containerPort: 80
+      protocol: TCP
+  # -- Liveness probe configuration
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+  # -- Readiness probe configuration
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+  # -- Application environment variables
+  env: []
+  # -- Application environment variables from ConfigMaps/Secrets
+  envFrom: []
+  # -- Application volume mounts
+  volumeMounts: []
+  # -- Application volumes
+  volumes: []
+
+## Service configuration
+service:
+  # -- Service type
+  type: ClusterIP
+  # -- Service port
+  port: 80
+  # -- Service annotations
+  annotations: {}
+
+## Ingress configuration
+ingress:
+  # -- Enable ingress
+  enabled: false
+  # -- Ingress class name
+  className: ""
+  # -- Ingress annotations
+  annotations: {}
+  # -- Ingress hosts configuration
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  # -- Ingress TLS configuration
+  tls: []
+
+## Autoscaling configuration
+autoscaling:
+  # -- Enable horizontal pod autoscaling
+  enabled: false
+  # -- Minimum replicas
+  minReplicas: 1
+  # -- Maximum replicas
+  maxReplicas: 10
+  # -- Target CPU utilization percentage
+  targetCPUUtilizationPercentage: 80
+  # -- Target memory utilization percentage
+  targetMemoryUtilizationPercentage: 80
+
+## Service account configuration
+serviceAccount:
+  # -- Create service account
+  create: true
+  # -- Service account annotations
+  annotations: {}
+  # -- Service account name
+  name: ""
+
+## Pod disruption budget configuration
+podDisruptionBudget:
+  # -- Enable pod disruption budget
+  enabled: false
+  # -- Minimum available pods
+  minAvailable: 1
+  # -- Maximum unavailable pods
+  maxUnavailable: ""
+
+## Network policies
+networkPolicy:
+  # -- Enable network policies
+  enabled: false
+  # -- Ingress rules
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels: {}
+  # -- Egress rules
+  egress:
+    - to:
+        - podSelector:
+            matchLabels: {}
+
+## Prometheus ServiceMonitor configuration
+serviceMonitor:
+  # -- Enable ServiceMonitor
+  enabled: false
+  # -- ServiceMonitor labels
+  labels: {}
+  # -- ServiceMonitor namespace
+  namespace: ""
+  # -- Interval at which metrics should be scraped
+  interval: 30s
+  # -- Timeout for scraping
+  scrapeTimeout: 10s
+  # -- ServiceMonitor endpoint configuration
+  endpoints:
+    - port: http
+      path: /metrics
