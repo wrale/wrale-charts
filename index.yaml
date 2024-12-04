@@ -1,3 +1,27 @@
 apiVersion: v1
-entries: {}
-generated: "2024-04-03T12:00:00.000000000Z"
+entries:
+  app-template:
+  - annotations:
+      category: Application Template
+    apiVersion: v2
+    appVersion: 1.0.0
+    created: "2024-12-04T15:27:26.058840774Z"
+    description: A generic template for Kubernetes applications with best practices
+      built in
+    digest: 0bc0ad4fed517048570c6a768b67268da941dbf6e7933eabd47d3a297d5fbf68
+    icon: https://raw.githubusercontent.com/wrale/wrale-charts/main/charts/app-template/icon.png
+    keywords:
+    - template
+    - application
+    - web
+    - microservice
+    kubeVersion: '>= 1.19.0-0'
+    maintainers:
+    - email: team@wrale.com
+      name: Wrale Team
+    name: app-template
+    type: application
+    urls:
+    - https://github.com/wrale/wrale-charts/releases/download/app-template-0.1.0/app-template-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-12-04T15:27:26.058870639Z"
