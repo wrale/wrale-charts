@@ -6,7 +6,7 @@ This repository hosts official Helm charts for Wrale projects. Our charts follow
 
 ### Prerequisites
 - Kubernetes 1.19+
-- Helm 3.2.0+
+- Helm 3.13.0+
 - kubectl configured with access to your cluster
 
 ### Installation
@@ -37,7 +37,7 @@ cd wrale-charts
 ```
 
 2. Install development dependencies:
-- [helm](https://helm.sh/docs/intro/install/)
+- [helm](https://helm.sh/docs/intro/install/) (v3.13.0+)
 - [helm-docs](https://github.com/norwoodj/helm-docs)
 - [yamllint](https://github.com/adrienverge/yamllint)
 - [ct (chart-testing)](https://github.com/helm/chart-testing)
@@ -49,9 +49,9 @@ pre-commit install
 
 ### Creating a New Chart
 
-1. Create a new chart using the template:
+1. Create a new chart using our template:
 ```bash
-helm create charts/my-chart
+cp -r charts/app-template charts/my-chart
 ```
 
 2. Update chart files following our [Chart Guidelines](docs/GUIDELINES.md)
@@ -63,8 +63,8 @@ helm-docs -c charts/my-chart
 
 4. Test your chart:
 ```bash
-ct lint --charts charts/my-chart
-helm test my-chart
+ct lint --config .github/ct.yaml --charts charts/my-chart
+ct install --config .github/ct.yaml --charts charts/my-chart
 ```
 
 ## Testing
@@ -75,21 +75,22 @@ Our CI pipeline automatically runs:
 - Helm chart linting
 - Chart installation tests
 - Template validation
+- Schema validation
 
 ### Local Testing
 1. Lint your chart:
 ```bash
-helm lint charts/my-chart
+ct lint --config .github/ct.yaml --charts charts/my-chart
 ```
 
-2. Run chart tests:
+2. Install and test chart:
 ```bash
-helm test my-chart
+ct install --config .github/ct.yaml --charts charts/my-chart
 ```
 
 3. Validate templates:
 ```bash
-helm template charts/my-chart
+helm template --debug charts/my-chart
 ```
 
 ## Release Process
@@ -103,7 +104,8 @@ helm template charts/my-chart
 4. Upon merge to main:
    - GitHub Actions will package the chart
    - Chart will be published to GitHub Pages
-   - Release will be created automatically
+   - GitHub Release will be created automatically
+   - Helm repository index will be updated
 
 ## Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
