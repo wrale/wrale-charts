@@ -62,12 +62,12 @@
 - [ ] Add performance testing baseline
 
 ## Community
-- [ ] Create issue templates
-  - [ ] Bug report template
-  - [ ] Feature request template
-  - [ ] Chart request template
-- [ ] Add pull request template
-- [ ] Set up community guidelines
+- [x] Create issue templates
+  - [x] Bug report template
+  - [x] Feature request template
+  - [x] Chart request template
+- [x] Add pull request template
+- [x] Set up community guidelines
 - [ ] Create contribution rewards program
 - [ ] Plan community meetings
 
