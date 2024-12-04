@@ -195,6 +195,8 @@ serviceMonitor:
   enabled: false
   # -- ServiceMonitor labels
   labels: {}
+  # -- ServiceMonitor annotations
+  annotations: {}
   # -- ServiceMonitor namespace
   namespace: ""
   # -- Interval at which metrics should be scraped
