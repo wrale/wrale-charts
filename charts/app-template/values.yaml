@@ -110,6 +110,19 @@ service:
   # -- Additional selector labels (optional)
   selector: {}
 
+## ServiceAccount configuration
+serviceAccount:
+  # -- Specifies whether a ServiceAccount should be created
+  create: true
+  # -- The name of the ServiceAccount to use
+  name: ""
+  # -- Additional labels for the ServiceAccount
+  labels: {}
+  # -- Annotations to add to the ServiceAccount
+  annotations: {}
+  # -- Image pull secrets for the ServiceAccount
+  imagePullSecrets: []
+
 ## Ingress configuration
 ingress:
   # -- Enable ingress
@@ -139,15 +152,6 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # -- Target memory utilization percentage
   targetMemoryUtilizationPercentage: 80
-
-## Service account configuration
-serviceAccount:
-  # -- Create service account
-  create: true
-  # -- Service account annotations
-  annotations: {}
-  # -- Service account name
-  name: ""
 
 ## Pod disruption budget configuration
 podDisruptionBudget:
